@@ -68,7 +68,7 @@ class ProductsController extends Controller
         $oldCart = $request->session()->get('cart');
         $cart = new Cart($oldCart);
         $total = $cart->totalPrice;
-        return view('shoppping-cart' , ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        return view('shopping-cart' , ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
     public function postCheckout(Request $request) {
@@ -79,7 +79,7 @@ class ProductsController extends Controller
 
         if ( ! $hasCart)
         {
-            return redirect()->route('shop.checkout');
+            return redirect()->view('shopping-cart');
         }
 
         $order = new Order();
@@ -88,8 +88,14 @@ class ProductsController extends Controller
         $order->name = $request->input('name');
         $order->save();
 
-        $request->session()->forget('product.cart');
+        $request->session()->forget('cart');
 
-        return redirect()->route('product')->with($request->session()->flash('success', 'Payment successful!'));
+        return redirect()->route('home')->with($request->session()->flash('success', 'Payment successful!'));
+    }
+
+    public function filter(Request $request) {
+        $products = Product::where('category_id', $request->input('categories'))->get();
+        // dd($products);
+        return view('index', compact('products', $products));
     }
 }

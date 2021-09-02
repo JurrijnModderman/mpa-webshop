@@ -23,13 +23,16 @@ Route::get('/cart{id}',         [ProductsController::class, 'addToCart'])->name(
 Route::get('/reduce{id}',       [ProductsController::class, 'getReduceByOne'])->name('reduceByOne');
 Route::get('/remove{id}',       [ProductsController::class, 'getRemoveItem'])->name('remove');
 Route::get('/cart',             [ProductsController::class, 'getCart'])->name('product.cart');
-Route::get('/shopping-cart',    [ProductsController::class, 'getCheckout'])->name('product.getShoppingCart')->middleware('auth');
-Route::post('/shopping-cart',   [ProductsController::class, 'postCheckout'])->name('product.postShoppingCart')->middleware('auth');
+Route::get('/shopping-cart',    [ProductsController::class, 'getCheckout'])->name('product.getShoppingCart');
+Route::post('/shopping-cart',   [ProductsController::class, 'postCheckout'])->name('product.postShoppingCart');
+Route::post('/categories',   [ProductsController::class, 'filter'])->name('categories');
 
 Route::get('/', [ProductsController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class])->name('login');
 Route::get('/register', [LoginController::class])->name('register');
-Route::get('/logout', [LoginController::class])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // require __DIR__ . '/auth.php';
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
