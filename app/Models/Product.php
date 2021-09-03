@@ -8,6 +8,7 @@ use App\Models\Category;
 
 class Product extends Model
 {
+    //from db
     protected $fillable = ['image', 'title', 'description', 'price', 'category_id'];
 
     function categories() {

@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
       
     <title>MPA</title>
 </head>
@@ -56,7 +57,6 @@
     <p class="card-text">€{{$product->price}}-,</p>
     <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="btn btn-primary">Add to cart</a>
   </div>
-</div>
 </div>
 @endforeach
 <form action="{{ route('categories') }}" method="POST">

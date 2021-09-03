@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +28,12 @@ Route::get('/remove{id}',       [ProductsController::class, 'getRemoveItem'])->n
 Route::get('/cart',             [ProductsController::class, 'getCart'])->name('product.cart');
 Route::get('/shopping-cart',    [ProductsController::class, 'getCheckout'])->name('product.getShoppingCart');
 Route::post('/shopping-cart',   [ProductsController::class, 'postCheckout'])->name('product.postShoppingCart');
-Route::post('/categories',   [ProductsController::class, 'filter'])->name('categories');
+Route::post('/categories',      [ProductsController::class, 'filter'])->name('categories');
+Route::get('/',                 [ProductsController::class, 'index'])->name('home');
 
-Route::get('/', [ProductsController::class, 'index'])->name('home');
-Route::get('/login', [LoginController::class])->name('login');
-Route::get('/register', [LoginController::class])->name('register');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout',           [LoginController::class, 'logout'])->name('logout');
+Route::get('/home',     [HomeController::class, 'index'])->name('home');
 
+require __DIR__ . '/auth.php';
 
-// require __DIR__ . '/auth.php';
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
