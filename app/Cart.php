@@ -9,6 +9,7 @@ class Cart
     public $totalPrice = 0;
 
     public function __construct($oldCart)
+        //constructor to set all values
     {
         if ($oldCart) {
             $this->items = $oldCart->items;
@@ -19,10 +20,12 @@ class Cart
     }
 
     public function save() {
+        //function to save everything
         session()->put('cart', $this);
     }
 
     public function add($item, $id)
+        //function where an item gets added to the cart
     {
         $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
         if ($this->items) {
@@ -38,6 +41,7 @@ class Cart
     }
 
     public function reduceByOne($id)
+        //function where an item is getting reduced by one
     {
         $this->items[$id]['qty']--;
         $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
@@ -51,6 +55,7 @@ class Cart
     }
 
     public function removeItem($id)
+        //function where an item is getting removed completely
     {
         $this->totalQty -= $this->items[$id] ['qty'];
         $this->totalPrice -= $this->items[$id] ['price'];

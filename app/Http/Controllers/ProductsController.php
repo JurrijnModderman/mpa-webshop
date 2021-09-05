@@ -23,6 +23,8 @@ class ProductsController extends Controller
         /* Check if cart already exists.
         If the cart does exist it wil retrieve it.
         If the cart does not exist, it will be null */
+        //session = Sessions are used to store information about the user across the requests.
+        //request = The Request facade will grant you access to the current request that is bound in the container. 
         $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
         $cart =  new Cart($oldCart);
         $cart->add($product, $product->id);
@@ -88,6 +90,7 @@ class ProductsController extends Controller
         }
 
         $order = new Order();
+        //serialize = a way to store the values in an object into a text string format(similar to JSON)
         $order->cart = serialize($cart);
         $order->address = $request->input('address');
         $order->name = $request->input('name');
