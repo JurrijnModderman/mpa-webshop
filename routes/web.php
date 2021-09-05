@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', 'App\Http\Controllers\ProductsController@index')->name('product');
-// Route::get('/cart/{id}', 'ProductsController@addToCart')
-// ->name('product.addToCart');\
-// Route::get('/', [HomeController::class, 'index'])->name('product.index');
 Route::get('/cart{id}',         [ProductsController::class, 'addToCart'])->name('addToCart');
 Route::get('/reduce{id}',       [ProductsController::class, 'getReduceByOne'])->name('reduceByOne');
 Route::get('/remove{id}',       [ProductsController::class, 'getRemoveItem'])->name('remove');
