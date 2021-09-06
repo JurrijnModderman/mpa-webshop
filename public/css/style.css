@@ -98,5 +98,8 @@ span.price {
 .navbar {
   text-decoration: none;
   list-style-type: none;
+}
+
+.navbar-brand {
   margin-left: 2vw;
 }
