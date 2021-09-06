@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/cart{id}',         [ProductsController::class, 'addToCart'])->name('addToCart');
 Route::get('/reduce{id}',       [ProductsController::class, 'getReduceByOne'])->name('reduceByOne');
+Route::get('/add{id}',          [ProductsController::class, 'getAddByOne'])->name('addByOne');
 Route::get('/remove{id}',       [ProductsController::class, 'getRemoveItem'])->name('remove');
 Route::get('/cart',             [ProductsController::class, 'getCart'])->name('product.cart');
 Route::get('/shopping-cart',    [ProductsController::class, 'getCheckout'])->name('product.getShoppingCart');

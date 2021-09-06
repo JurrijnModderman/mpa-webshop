@@ -8,9 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
-    
-    
-
 
     <title>Shopping Cart</title>
 </head>
@@ -18,9 +15,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand" href="{{route('home')}}">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
   <li class="logout"><a href="{{ url('/logout') }}" class="menu-btn">Logout</a></li>
 </nav>
 
@@ -44,6 +38,8 @@
                 <td>
                         <a class="dropdown-item"
                                href="{{ route('reduceByOne', ['id'=> $product['item']['id']]) }}">Reduce by 1</a>
+                        <a class="dropdown-item"
+                               href="{{ route('addByOne', ['id'=> $product['item']['id']]) }}">Add by 1</a>
                         <a class="dropdown-item"
                                href="{{ route('remove', ['id'=> $product['item']['id']]) }}">Reduce all</a>
                     </div>

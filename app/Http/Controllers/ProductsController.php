@@ -25,8 +25,7 @@ class ProductsController extends Controller
         If the cart does not exist, it will be null */
         //session = Sessions are used to store information about the user across the requests.
         //request = The Request facade will grant you access to the current request that is bound in the container. 
-        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
-        $cart =  new Cart($oldCart);
+        $cart =  new Cart($request);
         $cart->add($product, $product->id);
         // Add products to cart
         $request->session()->put('cart', $cart);
@@ -34,8 +33,7 @@ class ProductsController extends Controller
     }
 
     public function getReduceByOne(Request $request, $id) {
-        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart($request);
         $cart->reduceByOne($id);
 
         if (count($cart->items) > 0) {
@@ -46,9 +44,14 @@ class ProductsController extends Controller
         return redirect()->route('product.cart');
     }
 
+    public function getAddByOne(Request $request, $id) {
+        $cart = new Cart($request);
+        $cart->addByOne($id);
+        return redirect()->route('product.cart');
+    }
+
     public function getRemoveItem(Request $request, $id) {
-        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart($request);
         $cart->removeItem($id);
 
         if (count($cart->items) > 0) {
@@ -63,8 +66,7 @@ class ProductsController extends Controller
         if (!$request->session()->has('cart')) {
             return view('cart', ['products' => null]);
         }
-        $oldCart = $request->session()->get('cart');
-        $cart =  new Cart($oldCart);
+        $cart =  new Cart($request);
         return view('cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
@@ -72,8 +74,7 @@ class ProductsController extends Controller
         if (!$request->session()->has('cart')) {
             return view('product.cart');
         }
-        $oldCart = $request->session()->get('cart');
-        $cart = new Cart($oldCart);
+        $cart = new Cart($request);
         $total = $cart->totalPrice;
         return view('shopping-cart' , ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }

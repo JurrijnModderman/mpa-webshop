@@ -2,15 +2,19 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
+
 class Cart
 {
     public $items = [];
     public $totalQty = 0;
     public $totalPrice = 0;
 
-    public function __construct($oldCart)
+    public function __construct(Request $request)
         //constructor to set all values
     {
+        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+
         if ($oldCart) {
             $this->items = $oldCart->items;
             $this->totalQty = $oldCart->totalQty;
@@ -51,6 +55,16 @@ class Cart
         if ($this->items[$id]['qty'] <= 0) {
             unset($this->items[$id]);
         }
+        $this->save();
+    }
+
+    public function addByOne($id)
+        //function where an item is getting reduced by one
+    {
+        $this->items[$id]['qty']++;
+        $this->items[$id]['price'] += $this->items[$id]['item']['price'];
+        $this->totalQty++;
+        $this->totalPrice += $this->items[$id]['item']['price'];
         $this->save();
     }
 
