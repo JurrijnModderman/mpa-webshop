@@ -81,7 +81,6 @@ class ProductsController extends Controller
 
     public function postCheckout(Request $request) {
         $hasCart = $request->session()->has('cart');
-        $oldCart = $request->session()->get('cart');
         $cart = new Cart($request);
         $total = $cart->totalPrice;
 
