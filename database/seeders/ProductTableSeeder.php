@@ -37,7 +37,7 @@ class ProductTableSeeder extends Seeder
             'title' => 'product3',
             'description' => 'description3',
             'price' => 12,
-            'category_id' => 3
+            'category_id' => 2
         ]);
         $product->save();
 
@@ -46,7 +46,7 @@ class ProductTableSeeder extends Seeder
             'title' => 'product4',
             'description' => 'description4',
             'price' => 15,
-            'category_id' => 4
+            'category_id' => 3
         ]);
         $product->save();
 
@@ -55,7 +55,7 @@ class ProductTableSeeder extends Seeder
             'title' => 'product5',
             'description' => 'description5',
             'price' => 15,
-            'category_id' => 5
+            'category_id' => 3
         ]);
         $product->save();
     }
