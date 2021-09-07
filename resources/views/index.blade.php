@@ -45,7 +45,7 @@
     </div>
   </div>
   @endif
-@foreach(App\Models\Product::all() as $product)
+@foreach($products as $product)
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src='{{$product->image}}' alt="Card image cap">
   <div class="card-body">

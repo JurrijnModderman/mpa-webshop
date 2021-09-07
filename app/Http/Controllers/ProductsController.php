@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Cart;
+use App\Models\Category;
 use App\Models\Order;
 
 class ProductsController extends Controller
@@ -102,9 +103,9 @@ class ProductsController extends Controller
     }
 
     public function filter(Request $request) {
-
+        //$categories = Category::all();
         // Getting all products where category_id == input category
-        $products = Product::where('id', $request->input('categories'))->get();
+        $products = Product::where('id', $request->categories)->get();
         return view('index', compact('products', $products));
     }
 }
