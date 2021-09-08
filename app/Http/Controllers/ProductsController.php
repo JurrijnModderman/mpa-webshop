@@ -14,8 +14,11 @@ class ProductsController extends Controller
     {
         //Getting all the products that I created in my seeder, from my database
         $products = Product::all();
+        $categories = Category::all();
 
-        return view('index', compact('products', $products));
+        // return view('index', [compact('products', $products), compact('categories', $categories)]);
+        return view('index', compact('products', $products), compact('categories', $categories));
+        // return view('index', compact('categories', $categories));
     }
 
     public function addToCart(Request $request, $id) {
@@ -36,12 +39,6 @@ class ProductsController extends Controller
     public function getReduceByOne(Request $request, $id) {
         $cart = new Cart($request);
         $cart->reduceByOne($id);
-
-        if (count($cart->items) > 0) {
-            $request->session()->put('cart', $cart);
-        } else {
-            $request->session()->forget('cart');
-        }
         return redirect()->route('product.cart');
     }
 
@@ -54,12 +51,6 @@ class ProductsController extends Controller
     public function getRemoveItem(Request $request, $id) {
         $cart = new Cart($request);
         $cart->removeItem($id);
-
-        if (count($cart->items) > 0) {
-            $request->session()->put('cart', $cart);
-        } else {
-            $request->session()->forget('cart');
-        }
         return redirect()->route('product.cart');
     }
 
@@ -103,7 +94,6 @@ class ProductsController extends Controller
     }
 
     public function filter(Request $request) {
-        //$categories = Category::all();
         // Getting all products where category_id == input category
         $products = Product::where('category_id', $request->categories)->get();
         return view('index', compact('products', $products));

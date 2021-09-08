@@ -11,10 +11,8 @@
 <body>
   
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-@if (Auth::user())
 <a class="navbar-brand" href="{{route('home')}}">Home</a>
   <li class="logout"><a href="{{ url('/logout') }}" class="menu-btn">Logout</a></li>
-  @else
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
@@ -27,7 +25,6 @@
           @csrf
         </div>
       </li>
-      @endif
       <li class="nav-item">
         <a class="nav-link" href="{{route('product.cart')}}">Shopping Cart
         <span>{{Session::has('cart') ? Session::get('cart')->totalQty : ''}}</span>
@@ -60,7 +57,7 @@
             @csrf
             <div class="custom-select" style="width:200px;">
                 <select name="categories">
-                    @foreach(App\Models\Category::all() as $category)
+                    @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>

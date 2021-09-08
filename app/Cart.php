@@ -25,7 +25,13 @@ class Cart
 
     public function save() {
         //function to save everything
-        session()->put('cart', $this);
+        //if in the cart, easier to change
+        //edit, done
+        if (count($this->items) > 0) {
+            session()->put('cart', $this);
+        } else {
+            session()->forget('cart');
+        }
     }
 
     public function add($item, $id)
