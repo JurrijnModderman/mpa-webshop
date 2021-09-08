@@ -28,7 +28,7 @@ Route::post('/shopping-cart',   [ProductsController::class, 'postCheckout'])->na
 Route::post('/categories',      [ProductsController::class, 'filter'])->name('categories');
 Route::get('/',                 [ProductsController::class, 'index'])->name('home');
 
-Route::get('/logout',           [LoginController::class, 'logout'])->name('own_logout')->middleware('auth');
+Route::get('/logout',           [LoginController::class, 'logout'])->name('own_logout');
 
 require __DIR__ . '/auth.php';
 
