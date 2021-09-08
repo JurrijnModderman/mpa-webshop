@@ -105,7 +105,7 @@ class ProductsController extends Controller
     public function filter(Request $request) {
         //$categories = Category::all();
         // Getting all products where category_id == input category
-        $products = Product::where('id', $request->categories)->get();
+        $products = Product::where('category_id', $request->categories)->get();
         return view('index', compact('products', $products));
     }
 }
